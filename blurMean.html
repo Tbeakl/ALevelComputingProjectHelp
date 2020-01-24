@@ -49,10 +49,99 @@
 			<div id="information">
 				<h3>What is a Mean Blur?</h3>
 				<p>A Mean Blur is the simplest type of blur it just takes the arithmetic mean of the surrouding pixels and store's that vlaue at the current pixel.  It looks at the pixels in a square surrounding the pixel we are finding the value of this makes it look unnatural so people tend to dislike it but it is very fast to run because it looks in a square.  Mean blurs because of this are generally used for preprossesing when remvoing noise rather than when people will actually see the result of the blur.</p>
-				<img src="MeanBlurDemonstrationImage.png" alt="An image showing a recreation of some stars in the night sky being blurred by a mean blur"/>
+				<p align = "center"><img src="MeanBlurDemonstrationImage.png" alt="An image showing a recreation of some stars in the night sky being blurred by a mean blur"/></p>
 				<h3>How does this tool implement it?</h3>
-				<p></p>
+				<p>To implement a mean blur this tool uses summed area tables, this enables each pixel's value to be calculated by drawing 4 values from the table, where as competeting soloutions the amount of operations increases per pixel as the size of the kernel increases.  Once it has calculated the value from the summed area table then it divides that value by how many pixels are contained within that region.</p>
+                <p>A summed area table (integral image) keeps stored in each location the total sum from the top left of the array to that point.</p>
+                <!--Here needs to be an example showing a regular table going to a summed area table and an accomypanying calculation showing how you calculate the sum of a particular area-->
+                <div align = "center" id="summedAreaTableDiagram">
+				<table style="border: none;" id="hiddenTable">
+					<td style="border: none;">
+						<table id="visibleTable">
+							<tr>
+								<td>25</td>
+								<td>52</td>
+								<td>38</td>
+								<td>45</td>
+								<td>94</td>
+							</tr>
+							<tr>
+								<td>45</td>
+								<td style="background-color:lightsalmon;">98</td>
+								<td style="background-color:lightsalmon;">45</td>
+								<td style="background-color:lightsalmon;">2</td>
+								<td>84</td>
+							</tr>
+							<tr>
+								<td>65</td>
+								<td style="background-color:lightsalmon;">24</td>
+								<td style="background-color:lightsalmon;">68</td>
+								<td style="background-color:lightsalmon;">12</td>
+								<td>93</td>
+							</tr>
+							<tr>
+								<td>15</td>
+								<td style="background-color:lightsalmon;">45</td>
+								<td style="background-color:lightsalmon;">82</td>
+								<td style="background-color:lightsalmon;">64</td>
+								<td>57</td>
+							</tr>
+							<tr>
+								<td>34</td>
+								<td>19</td>
+								<td>84</td>
+								<td>39</td>
+								<td>72</td>
+							</tr>
+						</table>
+					</td>
+					<td style="border: none;">
+						<p>The diagram on the left shows the original table with the values for each position, we want to find out the sum of the shaded area.  We can do this using a summed area table (Diagram on Right), we need to perform the following calculation:</p>
+						<p style="text-align: center;">Area Sum = <span style="color: red;">725</span> - <span style="color: blue;">160</span>  - <span style="color: green;">150</span> + <span style="color: purple;">25</span> = 440</p>
+					</td>
+					<td style="border: none;">
+						<table id="visibleTable">
+							<tr>
+								<td style="background-color: purple;">25</td>
+								<td>77</td>
+								<td>115</td>
+								<td style="background-color: blue">160</td>
+								<td>254</td>
+							</tr>
+							<tr>
+								<td>70</td>
+								<td>220</td>
+								<td>303</td>
+								<td>350</td>
+								<td>528</td>
+							</tr>
+							<tr>
+								<td>135</td>
+								<td>309</td>
+								<td>460</td>
+								<td>519</td>
+								<td>790</td>
+							</tr>
+							<tr>
+								<td style="background-color: green">150</td>
+								<td>369</td>
+								<td>602</td>
+								<td style="background-color: red">725</td>
+								<td>1053</td>
+							</tr>
+							<tr>
+								<td>184</td>
+								<td>422</td>
+								<td>739</td>
+								<td>901</td>
+								<td>1301</td>
+							</tr>
+						</table>
+					</td>
+				</table>
+				</div>
 				<h3>How to use the Mean Blur in this tool</h3>
+				<p>The Radius/Standard Deviation textbox for mean blur is the radius of the square, the width of the square will be two times the radius plus one.</p>
 			</div>
 		</div>
 		<div id="footer"></div>
